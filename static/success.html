@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>Recording success</title>
+    <title>Recording Succesful</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            font-family: 'Proxima Nova', sans-serif;
+            color: white;
+        }
+        .gradient-bg {
+            position: relative;
+            background: #4300ff;
+            background: linear-gradient(135deg, #4300ff 0%, #717371 100%);
+        }
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(
+                0deg,
+                #000 0%,
+                rgba(0, 0, 0, .5) 12%,
+                rgba(0, 0, 0, .1) 30%,
+                rgba(0, 0, 0, 0) 40%
+            );
+        }
+
+        h1 {
+            letter-spacing: -0.04em;
+        }
+        a {
+            text-decoration: underline !important;
+        }
+    </style>
 </head>
 
 <body>
-<h1>Diskplayer Recorder</h1>
-<h2>Recording successful!</h2>
-<p>
-    <a href="/">Record another disk</a>
-</p>
+    <div class="gradient-bg h-screen flex justify-center">
+        <div class="relative flex flex-col justify-center items-center mx-8">
+            <h1 class="font-bold text-6xl text-center mb-8 w-full">
+                Recording Successful!
+            </h1>
+            <p>
+                <a href="/">Record another disk</a>
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>

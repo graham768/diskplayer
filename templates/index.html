@@ -4,46 +4,107 @@
 <head>
     <meta charset="utf-8">
     <title>Diskplayer Recorder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function showCurrentDevices() {
+            document.getElementById('current_devices').style.display = "block";
+        }
+    </script>
+    <style>
+        html {
+            font-family: 'Proxima Nova', sans-serif;
+            color: white;
+        }
+        .gradient-bg {
+            position: relative;
+            background: #4300ff;
+            background: linear-gradient(135deg, #4300ff 0%, #717371 100%);
+        }
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(
+                0deg,
+                #000 0%,
+                rgba(0, 0, 0, .5) 12%,
+                rgba(0, 0, 0, .1) 30%,
+                rgba(0, 0, 0, 0) 40%
+            );
+        }
+        .button {
+            text-align: center;
+            align-items: center;
+            background-color: #1DB954 !important;
+            border-radius: 999px;
+            padding: 0 60px;
+            min-height: 54px;
+            max-width: 350px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 56px;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+        .button:hover {
+            background-color: #1ed760 !important;
+        }
+        .button:active {
+            background-color: #1db954 !important;
+        }
+        .button:focus {
+            outline: none;
+        }
+
+        h1 {
+            letter-spacing: -0.04em;
+        }
+        a {
+            text-decoration: underline;
+        }
+        .input{
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            text-align: center;
+            color: rgb(0 0 0);
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-<form action="/record" method="post">
-    <h1>Diskplayer Recorder</h1>
-    <section>
-        <p>
-            <h3>lsblk output:</h3>
-            <pre>
-{{printf "%s" .Lsblk}}
-            </pre>
-        </p>
-    </section>
-    <section>
-        <h3>Recorder parameters</h3>
-        <p>
+    <div class="gradient-bg h-screen flex justify-center">
+        <form action="/record" method="post" class="relative flex flex-col justify-center items-center mx-8">
+            <h1 class="font-bold text-6xl text-center mb-8 w-full">
+                Floppy Disk Recorder
+            </h1>
             <label for="device_path">
-                <span>Device path: </span>
+                <span>Device Path: </span>
             </label>
-            <input type="text" id="device_path" name="device_path">
-        </p>
-        <p>
+            <input class="input" type="text" id="device_path" name="device_path" value="/dev/sdb">
             <label for="web_url">
-                <span>Spotify web URL: </span>
+                <span>Spotify Web URL: </span>
             </label>
-            <input type="text" id="web_url" name="web_url">
-        </p>
-        <p>
-            <label for="light">
-                <span>Smartbulb scene</span>
-            </label>
-            <input type="text" id="light" name="light">
-        </p>
-    </section>
-    <section>
-        <p>
-            <button type="submit">Record disk</button>
-        </p>
-    </section>
-</form>
+            <input class="input" type="text" id="web_url" name="web_url" placeholder="SpotifyUrl">
+            <button type="submit" class="button">
+                Record to Floppy
+            </button>
+
+            <div class="underline cursor-pointer" onclick="showCurrentDevices()">Current Devices</div>
+            <div id="current_devices" style="display: none;">
+                <pre>
+{{printf "%s" .Lsblk}}
+                </pre>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
