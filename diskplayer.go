@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"github.com/zmb3/spotify"
 	"os"
+	"net/http"
+	"time"
 )
 
 // PlayPath will play an album or playlist by reading a Spotify URI from a file whose filepath is passed into the
@@ -18,17 +20,45 @@ func PlayPath(c Client, p string) error {
 	}
 	defer f.Close()
 
+	// TODO: scan them into different strings and call webhook with "event" string
 	s := bufio.NewScanner(f)
 	var l string
+	var lightColor string
 	if s.Scan() {
 		l = s.Text()
+	}
+	if s.Scan() {
+		lightColor = s.Text()
 	}
 
 	if l == "" {
 		return fmt.Errorf("unable to read line from path: %s", p)
 	}
 
+	if lightColor != "" {
+		//SetLight(lightColor)
+	}
+
 	return PlayUri(c, l)
+}
+
+// Set my smartbulb using ifttt and maker webhooks
+func SetLight(color string) error {
+	url := fmt.Sprintf("https://maker.ifttt.com/trigger/%s/with/key/dvzmHn0VCQpK3mrPhZ0O96", color)
+
+	tr := &http.Transport{
+		MaxIdleConns:       2,
+  		IdleConnTimeout:    3 * time.Second,
+  		DisableCompression: true,
+	}
+	client := &http.Client{Transport: tr}
+        resp, err := client.Get(url)
+	if err != nil {
+		return err
+	}
+	fmt.Println(resp.Body)
+	resp.Body.Close()
+	return nil
 }
 
 // PlayURI will play the album or playlist Spotify URI that is passed in to the function.

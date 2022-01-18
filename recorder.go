@@ -11,11 +11,13 @@ import (
 // the filepath specified in the diskplayer.yaml configuration file under the recorder.file_path field.
 // The web URL should be something like https://open.spotify.com/album/1S7mumn7D4riEX2gVWYgPO
 // Returns an error if one is encountered.
-func Record(url string, fullPath string) error {
+func Record(light string, url string, fullPath string) error {
 	s, err := createSpotifyUri(url)
 	if err != nil {
 		return err
 	}
+
+	s += "\n"+light
 
 	err = writeToDisk(s, fullPath)
 	if err != nil {

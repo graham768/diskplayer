@@ -88,6 +88,7 @@ func (s *RealDiskplayerServer) Authenticator() *spotify.Authenticator {
 func recordHandler(w http.ResponseWriter, r *http.Request) {
 	webUrl := r.FormValue("web_url")
 	devPath := r.FormValue("device_path")
+	light := r.FormValue("light")
 
 	folder := ConfigValue(RECORD_FOLDER_PATH)
 	filename := ConfigValue(RECORD_FILENAME)
@@ -105,7 +106,7 @@ func recordHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	err = Record(webUrl, dstPath)
+	err = Record(light, webUrl, dstPath)
 	if err != nil {
 		errorPage(w, err)
 	}

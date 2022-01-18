@@ -59,6 +59,8 @@ $ go test
 
 ## Configuration
 
+**NOTE FROM BEN: I moved this to `/etc/diskplayer/diskplayer` according to config info**
+
 In this repository there exists a `diskplayer.yaml` configuration file which must be updated with the relevant config values.
 
 diskplayer will search for the `diskplayer.yaml` configuration file in one of the following locations:
