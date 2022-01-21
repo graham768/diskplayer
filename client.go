@@ -16,6 +16,7 @@ type Client interface {
 	Pause() error
 	TransferPlayback(deviceID spotify.ID, play bool) error
 	PlayOpt(opt *spotify.PlayOptions) error
+	Shuffle(shuffle bool) error
 }
 
 type SpotifyClient struct {
@@ -41,4 +42,9 @@ func (sc *SpotifyClient) TransferPlayback(deviceID spotify.ID, play bool) error 
 // PlayOpt will initiate playback on the device as specified in the PlayOptions.
 func (sc *SpotifyClient) PlayOpt(opt *spotify.PlayOptions) error {
 	return sc.client.PlayOpt(opt)
+}
+
+// PlayOpt will initiate playback on the device as specified in the PlayOptions.
+func (sc *SpotifyClient) Shuffle(shuffle bool) error {
+	return sc.client.Shuffle(shuffle)
 }

@@ -29,6 +29,7 @@ func TestPlayUriSuccess(t *testing.T) {
 	ds := []spotify.PlayerDevice{d}
 
 	m.On("PlayerDevices").Return(ds, nil)
+	m.On("Shuffle").Return(nil)
 	m.On("PlayOpt", mock.AnythingOfType("*spotify.PlayOptions")).Return(nil)
 
 	err := PlayUri(m, "foobar")

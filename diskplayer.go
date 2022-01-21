@@ -99,6 +99,7 @@ func PlayUri(c Client, u string) error {
 		PlaybackContext: &spotifyUri,
 	}
 
+	c.Shuffle(true)
 	return c.PlayOpt(o)
 }
 

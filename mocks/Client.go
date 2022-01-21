@@ -10,6 +10,19 @@ type Client struct {
 	mock.Mock
 }
 
+func (_m *Client) Shuffle(shuffle bool) error {
+	ret := _m.Called()
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func() error); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // Pause provides a mock function with given fields:
 func (_m *Client) Pause() error {
 	ret := _m.Called()
